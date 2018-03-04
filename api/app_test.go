@@ -14,10 +14,10 @@ var _ = Describe("AppHandler", func() {
 	var c *websocket.Conn
 	var err error
 
-	var write = func(m string) {
-		err = c.WriteMessage(websocket.TextMessage, []byte(m))
-		Expect(err).NotTo(HaveOccurred())
-	}
+	// var write = func(m string) {
+	// 	err = c.WriteMessage(websocket.TextMessage, []byte(m))
+	// 	Expect(err).NotTo(HaveOccurred())
+	// }
 
 	var read = func(m string) {
 		_, message, err := c.ReadMessage()
@@ -47,7 +47,6 @@ var _ = Describe("AppHandler", func() {
 	})
 
 	It("Example", func() {
-		write("test message")
-		read("test message")
+		read(`{"squad":{"players":[{"position":{"x":0,"y":0}}]}}`)
 	})
 })
