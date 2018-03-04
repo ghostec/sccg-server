@@ -35,7 +35,7 @@ build-docker:
 	@docker build -t $(project) .
 
 run:
-	@go run main.go start-api
+	@go run main.go
 
 run-docker:
 	@docker-compose up -d

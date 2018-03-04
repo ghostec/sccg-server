@@ -11,7 +11,7 @@ import (
 
 // WsHandler func
 func (a *App) WsHandler(w http.ResponseWriter, r *http.Request) {
-	c, err := upgrader.Upgrade(w, r, nil)
+	c, err := a.Upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		fmt.Println(err.Error())
 		return

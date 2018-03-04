@@ -2,8 +2,6 @@ package api
 
 import (
 	"context"
-	"flag"
-	"fmt"
 	"net"
 	"net/http"
 
@@ -12,14 +10,20 @@ import (
 
 // App struct
 type App struct {
-	Address string
-	Server  *http.Server
+	Address  string
+	Server   *http.Server
+	Upgrader websocket.Upgrader
 }
 
 // NewApp ctor
 func NewApp(a string) (*App, error) {
 	app := &App{
 		Address: a,
+		Upgrader: websocket.Upgrader{
+			CheckOrigin: func(r *http.Request) bool {
+				return true
+			},
+		},
 	}
 
 	err := app.configureApp()
@@ -63,15 +67,4 @@ func (a *App) ListenAndServe() error {
 // Stop method
 func (a *App) Stop() {
 	a.Server.Shutdown(context.Background())
-}
-
-var addr = flag.String("addr", "localhost:8080", "http service address")
-var upgrader = websocket.Upgrader{}
-
-func main() {
-	a, err := NewApp("localhost:8080")
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	a.ListenAndServe()
 }
