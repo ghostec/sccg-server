@@ -46,7 +46,7 @@ var _ = Describe("AppHandler", func() {
 		app.Stop()
 	})
 
-	It("Example", func() {
+	It("Starts a match", func() {
 		read(`{"squad":{"players":[{"position":{"x":0,"y":0}}]}}`)
 	})
 })

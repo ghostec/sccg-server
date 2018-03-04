@@ -29,6 +29,8 @@ func (g *Game) Update() error {
 	g.Mutex.Lock()
 	defer g.Mutex.Unlock()
 
+	g.Squad.Update()
+
 	return nil
 }
 
